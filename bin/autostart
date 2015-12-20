@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export PATH="$PATH:$HOME/bin"
+
+# X configs
+xrdb ~/.Xresources
+
+# window manager
+bspwm &
+
+# compositor
+compton -b &
+

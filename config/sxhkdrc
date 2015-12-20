@@ -1,9 +1,9 @@
 ### GENERAL
-# alt + z 						:: screenlock
-# alt + x 						:: quit X
+# alt + z 						:: logouy
+# alt + x 						:: lock
 # alt + q 						:: close window
-# alt + f  						:: fullscreen
 # alt + space					:: floating
+# alt + shift +space			:: tiled
 # alt + shift + r 				:: reload sxhkd
 # alt + (shift) + tab			:: cycle through windows
 
