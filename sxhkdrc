@@ -1,0 +1,103 @@
+### GENERAL
+# alt + z 						:: screenlock
+# alt + x 						:: quit X
+# alt + q 						:: close window
+# alt + f  						:: fullscreen
+# alt + space					:: floating
+# alt + shift + r 				:: reload sxhkd
+# alt + (shift) + tab			:: cycle through windows
+
+### MOVEMENT
+# alt + {1-5}					:: select workspace {1-5}
+# alt + shift + {1-5}			:: move to workspace {1-5}
+# alt + g						:: send window to cut last manual window
+# alt + {h,j,k,l}				:: focus {left,down,up,right}
+# alt + shift + {h,j,k,l}		:: swap {left,down,up,right}
+# alt + ctrl + {h,j,k,l}		:: select split area {left,down,up,right}
+# alt + ctrl + space 			:: cancel split select
+# super + (shift) + {h,j,k,l} 	:: resize
+
+### MOUSE STUFF
+# alt + B1						:: move
+# alt + B2						:: resize
+
+### WM INDEPENDENT
+# alt + d 						:: rofi in run mode
+# alt + s 						:: rofi in ssh mode
+# alt + enter					:: terminal
+# alt + F1 						:: trackpad toggle
+# alt + F2 						:: sound toggle
+# alt + F3 						:: volume down
+# alt + F4 						:: volume up
+# alt + F5 						:: brightness down
+# alt + F6 						:: brightness up
+# alt + F7 						:: xrandr toggle
+
+~button1
+    bspc pointer -g focus
+
+alt + z
+	xfce4-session-logout
+
+alt + q
+	bspc window -c
+
+alt + f
+	bspc window -t fullscreen
+
+alt + space
+	bspc window -t floating
+
+alt + shift + space
+    bspc window -t tiled
+
+alt + control + space
+    bspc window -p cancel
+
+alt + g
+	bspc window --to-window last.manual
+
+alt + {_,shift + }{h,j,k,l}
+	bspc window -{f,s} {left,down,up,right}
+
+alt + ctrl + {h,j,k,l}
+	bspc window -p {left,down,up,right}
+
+super + {h,j,k,l}
+	bspc window -e {left -10,down +10,up -10,right +10}
+
+super + shift + {h,j,k,l}
+	bspc window -e {right -10,up +10,down -10,left +10}
+
+alt + {_,shift + }{1-5}
+	bspc {desktop -f,window -d} ^{1-5}
+
+alt + button{1-3}
+	bspc pointer -g {move,resize_side,resize_corner}
+
+alt + Return
+	urxvt
+
+alt + d
+    rofi -show run -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
+
+alt + s
+    rofi -show ssh -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
+
+alt + Tab
+    rofi -show window -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
+
+alt + shift + r
+	pkill -USR1 -x sxhkd
+
+alt + F1
+	~/bin/trackpad-toggle
+
+alt + F5
+	light -U 10
+
+alt + F6
+	light -A 10
+
+alt + F7
+	~/bin/xrandr-toggle
