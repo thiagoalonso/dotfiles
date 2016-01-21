@@ -2,7 +2,7 @@
 
 # Set these to your outputs
 INT=LVDS
-EXT=CRT1
+EXT=VGA-0
 
 XRANDR=$(xrandr)
 if [[ -z $XRANDR ]]; then
@@ -28,8 +28,10 @@ if [[ $INT_STATE = "on" && $EXT_STATE = "off" ]]; then
     # Switch to external only
     xrandr --output $INT --off --output $EXT --auto
     bspc monitor $EXT -d 1 2 3 4 5
-else
+    bspc config top_padding 26
+else 
     # Switch to internal only
     xrandr --output $INT --auto --output $EXT --off
     bspc monitor $INT -d 1 2 3 4 5
+    bspc config top_padding 26
 fi

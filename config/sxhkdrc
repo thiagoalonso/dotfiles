@@ -1,9 +1,10 @@
 ### GENERAL
-# alt + z 						:: logouy
-# alt + x 						:: lock
+# alt + z 						:: screenlock
+# alt + x 						:: quit X
+# alt + x 						:: quit X
 # alt + q 						:: close window
+# alt + f  						:: fullscreen
 # alt + space					:: floating
-# alt + shift +space			:: tiled
 # alt + shift + r 				:: reload sxhkd
 # alt + (shift) + tab			:: cycle through windows
 
@@ -11,6 +12,7 @@
 # alt + {1-5}					:: select workspace {1-5}
 # alt + shift + {1-5}			:: move to workspace {1-5}
 # alt + g						:: send window to cut last manual window
+# alt + s 						:: swap with biggest window
 # alt + {h,j,k,l}				:: focus {left,down,up,right}
 # alt + shift + {h,j,k,l}		:: swap {left,down,up,right}
 # alt + ctrl + {h,j,k,l}		:: select split area {left,down,up,right}
@@ -22,9 +24,8 @@
 # alt + B2						:: resize
 
 ### WM INDEPENDENT
-# alt + d 						:: rofi in run mode
-# alt + s 						:: rofi in ssh mode
-# alt + enter					:: terminal
+# alt + d 						:: dmenu
+# alt + enter					:: rxvt-unicode
 # alt + F1 						:: trackpad toggle
 # alt + F2 						:: sound toggle
 # alt + F3 						:: volume down
@@ -39,8 +40,17 @@
 alt + z
 	xfce4-session-logout
 
+alt + F9
+	~/bin/poweroff
+
+alt + x 
+	~/bin/lock
+
 alt + q
 	bspc window -c
+
+alt + equal
+	bspc 
 
 alt + f
 	bspc window -t fullscreen
@@ -49,13 +59,13 @@ alt + space
 	bspc window -t floating
 
 alt + shift + space
-    bspc window -t tiled
-
-alt + control + space
-    bspc window -p cancel
+	bspc window -t tiled
 
 alt + g
-	bspc window --to-window last.manual
+	bspc window -w last.manual
+
+alt + s
+	bspc window -s biggest
 
 alt + {_,shift + }{h,j,k,l}
 	bspc window -{f,s} {left,down,up,right}
@@ -63,40 +73,55 @@ alt + {_,shift + }{h,j,k,l}
 alt + ctrl + {h,j,k,l}
 	bspc window -p {left,down,up,right}
 
+alt + ctrl + space
+	bspc window -p cancel
+
 super + {h,j,k,l}
 	bspc window -e {left -10,down +10,up -10,right +10}
 
 super + shift + {h,j,k,l}
 	bspc window -e {right -10,up +10,down -10,left +10}
 
-alt + {_,shift + }{1-5}
-	bspc {desktop -f,window -d} ^{1-5}
+alt + {_,shift + }{1-9,0}
+	bspc {desktop -f,window -d} '^{1-9,10}'
 
 alt + button{1-3}
 	bspc pointer -g {move,resize_side,resize_corner}
+
+alt + !button{1-3}
+	bspc pointer -t %i %i
+
+alt + @button{1-3}
+	bspc pointer -u
 
 alt + Return
 	urxvt
 
 alt + d
-    rofi -show run -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
+	rofi -show run -font "snap 10" -fg "#505050" -bg "#000000" -hlfg "#00ffff" -hlbg "#000000" -o 85
 
-alt + s
-    rofi -show ssh -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
-
-alt + Tab
-    rofi -show window -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
+alt + ctrl + p
+    setxkbmap -model abnt2 -layout br -variant abnt2
 
 alt + shift + r
 	pkill -USR1 -x sxhkd
 
-alt + F1
+alt + F1 
 	~/bin/trackpad-toggle
 
-alt + F5
+alt + F2 
+	/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+alt + F3 
+	/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+alt + F4 
+	/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+alt + F5 
 	light -U 10
 
-alt + F6
+alt + F6 
 	light -A 10
 
 alt + F7

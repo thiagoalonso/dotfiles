@@ -5,9 +5,8 @@ export PATH="$PATH:$HOME/bin"
 # X configs
 xrdb ~/.Xresources
 
-# window manager
-bspwm &
+# input
+setxkbmap -model abnt2 -layout br -variant abnt2
 
-# compositor
+# composition
 compton -b &
-
