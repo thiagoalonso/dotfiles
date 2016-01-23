@@ -1,0 +1,47 @@
+SoundWire Server Install Instructions for Linux
+-----------------------------------------------
+
+System Requirements:
+
+- Open firewall ports 59010 & 59011 UDP. You may do this from the GUI using
+  Firewall or a similar utility.
+
+- Install Pulse Audio Volume Control (pavucontrol) using your package manager.
+  You may do this from the GUI using "Add/Remove Programs" or a similar utility.
+  From the command line use "sudo yum install pavucontrol" on Red Hat/Fedora, or
+  "sudo apt-get install pavucontrol" on Debian/Ubuntu.
+
+- Install portaudio using your package manager, or from
+  http://www.portaudio.com/download.html
+  If your Linux distribution has the libportaudio2 package it will work
+  as well.
+
+- Install libcurl package.
+
+- Continue with the steps below. Install any other packages needed to satisfy
+  shared library dependencies if SoundWireServer fails to start. You should run
+  it from the command line to see any error messages. Note that Portaudio
+  usually displays a large number of errors, so these are suppressed unless you
+  specify the -verbose option when running SoundWireServer.
+
+SoundWire Server Installation:
+
+1. Add the directory containing these files to your search path. (You can skip
+   this step if you run SoundWireServer from the command line using the full
+   path.)
+
+2. At this point you can start SoundWire Server from the command line by typing
+   SoundWireServer. To run without a GUI or if your system has no X server
+   use the -nogui option. To start it from the GNOME desktop do the steps below.
+
+3. Copy the icon file sw-icon.xpm to directory ~/.icons or some other standard
+   location for icons.
+
+4. Copy the GNOME launcher file SoundWire-Server.desktop anywhere you like,
+   e.g. your desktop. Copy it to /usr/share/applications to appear in the GNOME
+   apps menu.
+
+You may need to modify these instructions if you use KDE or as per your Linux
+distribution.
+
+(Continue with the README.txt file.)

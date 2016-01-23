@@ -1,103 +1,68 @@
-### GENERAL
-# alt + z 						:: logouy
-# alt + x 						:: lock
-# alt + q 						:: close window
-# alt + space					:: floating
-# alt + shift +space			:: tiled
-# alt + shift + r 				:: reload sxhkd
-# alt + (shift) + tab			:: cycle through windows
-
-### MOVEMENT
-# alt + {1-5}					:: select workspace {1-5}
-# alt + shift + {1-5}			:: move to workspace {1-5}
-# alt + g						:: send window to cut last manual window
-# alt + {h,j,k,l}				:: focus {left,down,up,right}
-# alt + shift + {h,j,k,l}		:: swap {left,down,up,right}
-# alt + ctrl + {h,j,k,l}		:: select split area {left,down,up,right}
-# alt + ctrl + space 			:: cancel split select
-# super + (shift) + {h,j,k,l} 	:: resize
-
-### MOUSE STUFF
-# alt + B1						:: move
-# alt + B2						:: resize
-
-### WM INDEPENDENT
-# alt + d 						:: rofi in run mode
-# alt + s 						:: rofi in ssh mode
-# alt + enter					:: terminal
-# alt + F1 						:: trackpad toggle
-# alt + F2 						:: sound toggle
-# alt + F3 						:: volume down
-# alt + F4 						:: volume up
-# alt + F5 						:: brightness down
-# alt + F6 						:: brightness up
-# alt + F7 						:: xrandr toggle
-
-~button1
-    bspc pointer -g focus
-
-alt + z
-	xfce4-session-logout
-
-alt + q
-	bspc window -c
-
-alt + f
-	bspc window -t fullscreen
-
-alt + space
-	bspc window -t floating
-
-alt + shift + space
-    bspc window -t tiled
-
-alt + control + space
-    bspc window -p cancel
-
-alt + g
-	bspc window --to-window last.manual
-
-alt + {_,shift + }{h,j,k,l}
-	bspc window -{f,s} {left,down,up,right}
-
-alt + ctrl + {h,j,k,l}
-	bspc window -p {left,down,up,right}
-
-super + {h,j,k,l}
-	bspc window -e {left -10,down +10,up -10,right +10}
-
-super + shift + {h,j,k,l}
-	bspc window -e {right -10,up +10,down -10,left +10}
-
-alt + {_,shift + }{1-5}
-	bspc {desktop -f,window -d} ^{1-5}
-
-alt + button{1-3}
-	bspc pointer -g {move,resize_side,resize_corner}
-
+# terminal emulator
 alt + Return
 	urxvt
 
+# program launcher
 alt + d
-    rofi -show run -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
+	rofi -show run -font "MesloLGSforPowerline 10" -hide-scrollbar -separator-style none -bw 0 -padding 3 -lines 5 -location 7 -line-margin 0 -fg "#333" -hlbg "#141414" -hlfg "#fff" -disable-history -columns 1
 
-alt + s
-    rofi -show ssh -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
-
-alt + Tab
-    rofi -show window -font "MesloLGSforPowerline 10" -fg "#333" -bg "#101010" -hlfg "#b9b9b9" -hlbg "#101010" -o 85
-
+# make sxhkd reload its configuration files:
 alt + shift + r
 	pkill -USR1 -x sxhkd
 
-alt + F1
-	~/bin/trackpad-toggle
+# close and kill
+alt + {_,shift + }q
+	bspc node -{c,k}
 
-alt + F5
-	light -U 10
 
-alt + F6
-	light -A 10
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+alt + g
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
 
-alt + F7
-	~/bin/xrandr-toggle
+# swap the current node and the biggest node
+alt + b
+	bspc node -s biggest
+
+# set the window state
+alt + {shift + space,t,space,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# focus the node in the given direction
+alt + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus or send to the given desktop
+alt + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# preselect the direction
+alt + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+alt + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+alt + ctrl + space
+	bspc node -p cancel
+
+# expand the tiled space in the given direction
+super + ctrl + {h,j,k,l}
+	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+# contract the tiled space in the given direction
+super + shift + {h,j,k,l}
+	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+# focus
+~button1
+	bspc pointer -g focus
+
+# start move/resize
+alt + button{1-3}
+	; bspc pointer -g {move,resize_side,resize_corner}
+
+# end move/resize
+alt + @button{1-3}
+	bspc pointer -u

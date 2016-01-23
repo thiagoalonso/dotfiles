@@ -9,5 +9,4 @@ xrdb ~/.Xresources
 bspwm &
 
 # compositor
-compton -b &
-
+# compton &

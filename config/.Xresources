@@ -10,7 +10,7 @@ Xft.hinting:    true
 Xft.hintstyle:  hintslight
 Xft.lcdfilter:  lcddefault
 
-#define base00 #111111
+#define base00 #141414
 #define base01 #383830
 #define base02 #49483e
 #define base03 #75715e

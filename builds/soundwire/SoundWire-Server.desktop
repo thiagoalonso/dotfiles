@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=SoundWire Server
+Comment=Server program for SoundWire Android app
+Exec=SoundWireServer
+Icon=sw-icon.xpm
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio
